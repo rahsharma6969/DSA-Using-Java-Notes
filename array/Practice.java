@@ -15,7 +15,7 @@ public class Practice {
         // Collect all elements with frequency > 1
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             if (entry.getValue() > 1) {
-                duplicates.add(entry.getKey());
+                duplicates.add(entry.getKey()); // adding only the duplicate number once
             }
         }
 
@@ -320,7 +320,7 @@ public class Practice {
         int[] arr6 = {1,2,3,4,5,6,7};
         int k = 3;
         rotateArray(arr6, k);
-        
+
 
     }
 }

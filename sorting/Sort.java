@@ -23,17 +23,15 @@ public class Sort {
     
 
 
-    static void bubbleSort(int[] arr) {
+    static void bubbleSort(int[] arr){  // Time Complexity O(n^2)
         int n = arr.length;
-        // Outer loop for number of passes
-        for (int i = 0; i < n - 1; i++) {
-            // Inner loop for comparisons in each pass
-            for (int j = 0; j < n - 1 - i; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    // Swap arr[j] and arr[j+1]
+
+        for(int i=0; i<n-1;i++){
+            for(int j=0; j<n-1-i;j++){
+                if(arr[j] > arr[j+1]){
                     int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
                 }
             }
         }
@@ -43,8 +41,8 @@ public class Sort {
         int[] arr   = {7,8,2,3,1};
         bubbleSort(arr);
         System.out.println("Bubble Sort"+Arrays.toString(arr));
-        selectionSort(arr);
-        System.out.println("Selection Sort"+Arrays.toString(arr));
+        // selectionSort(arr);
+        // System.out.println("Selection Sort"+Arrays.toString(arr));
         
     }
 
