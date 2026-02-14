@@ -22,7 +22,7 @@ Explanation: The next greater element for each value of nums1 is as follows:
 - 1 is underlined in nums2 = [1,3,4,2]. The next greater element is 3.
 - 2 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.
 */
-
+import java.util.*;
 
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {  // but time complexity is O(n*m)
@@ -54,33 +54,31 @@ class Solution {
     // Optimized approach using stack
     public int[] nextGreaterElementOptimized(int[] nums1, int[] nums2){
         int n = nums2.length;
-        Map<Integer, Integer> map = new HashMap<>();
-        Stack<Integer> stack = new Stack<>();
+        Map<Integer, Integer> map = new HashMap<>(); // we will next greater element of nums2 in this map
+        Stack<Integer> stack = new Stack<Integer>(); // find next greater element of nums2 using stack
 
-       // we will find the next greater element for each element in nums2
-       for(int i= 0; i< n; i++){
-
-        while(!stack.isEmpty() && stack.peek() < nums2[i]){
-            int top = stack.pop();
-            map.put(top, nums2[i]);
+        for(int i=0 ; i<n ; i++){
+            while(!stack.isEmpty() && stack.peek() < nums2[i]){
+                 int top = stack.pop();
+                 map.put(top, nums2[i]);
+            }
+            stack.push(nums2[i]);
         }
-        stack.push(nums2[i]);
-       }
 
-         // for the remaining elements in the stack, there is no greater element
-         while(!stack.isEmpty()){
+        while(!stack.isEmpty()){
             int top = stack.pop();
             map.put(top, -1);
+        }
 
-    }
+        int[] ans = new int[nums1.length];
+        for(int i=0; i<nums1.length; i++){
+            ans[i]= map.get(nums1[i]);
+        }
+            return ans;
 
-    int [] ans = new int[nums1.length];
-    for(int i=0; i<nums1.length; i++){
-       if(map.containsKey(nums1[i])){
-        ans[i] = map.get(nums1[i]);
-       } 
-    }
-    return ans;
+         
+      
+    
    /// time complexity is O(n + m) where n and m are the lengths of nums1 and nums2 respectively
     }
 }

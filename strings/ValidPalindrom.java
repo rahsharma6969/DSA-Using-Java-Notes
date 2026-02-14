@@ -25,61 +25,53 @@ Explanation: "amanaplanacanalpanama" is a palindrome.
 
 class Solution {
 
-    // brute force approach
-    // time complexity: O(n)
-    // space complexity: O(n)
+    
     public boolean isPalindromeBruteForce(String s){
-        // convert to lowercase
-        s = s.toLowerCase();
+      
+        // convert the string to lowercase and remove non-alphanumeric characters
         StringBuilder filtered = new StringBuilder();
-
-        // concatenate only alphanumeric characters i.e letters and digits
-        for(char c: s.toCharArray()){
+        for(char c : s.toCharArray()){
             if(Character.isLetterOrDigit(c)){
-                filtered.append(c);
+                filtered.append(Character.toLowerCase(c));
             }
         }
 
         String filteredStr = filtered.toString();
-        String reveString = filtered.reverse().toString();
-        if(!filteredStr.equals(reveString)){
-            return false;
-        }
+        String reversedStr = filtered.reverse().toString();
+        return filteredStr.equals(reversedStr);
 
+    }
+
+    
+// using two pointers approach
+  public boolean isPalindromeTwoPointers(String s) {
+        int left = 0;
+        int right = s.length() - 1;
+        
+        while(left < right){
+            // move left pointer to the right until it points to an alphanumeric character
+            while(left < right && !Character.isLetterOrDigit(s.charAt(left))){
+                left++;
+            }
+            // move right pointer to the left until it points to an alphanumeric character
+            while(left < right && !Character.isLetterOrDigit(s.charAt(right))){
+                right--;
+            }
+
+            // compare characters at left and right pointers
+            if(Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))){
+                return false;
+            }
+            left++;
+            right--;
+        }
+       
+           
         return true;
 
-    }
-
-    // time complexity: O(n)
-    // space complexity: O(1)
-    // public boolean isPalindrome(String s) {
-    //     int left = 0;
-    //     int right = s.length() - 1;
-
-    //     while (left < right) {
-    //         // Move left pointer to next alphanumeric character
-    //         while (left < right && !Character.isLetterOrDigit(s.charAt(left))) {
-    //             left++;
-    //         }
-    //         // Move right pointer to previous alphanumeric character
-    //         while (left < right && !Character.isLetterOrDigit(s.charAt(right))) {
-    //             right--;
-    //         }
-
-    //         // Compare characters (case-insensitive)
-    //         if (Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))) {
-    //             return false;
-    //         }
-
-    //         left++;
-    //         right--;
-    //     }
-
-    //     return true;
-    // }
-
 
     }
+}
 
 
 
