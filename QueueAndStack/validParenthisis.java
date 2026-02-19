@@ -33,6 +33,8 @@ Input: s = "(]"
 
 Output: false */
 import java.util.Stack;
+import java.util.Map;
+import java.util.HashMap;
 public class validParenthisis {
 
     static boolean isValid(String s){
@@ -53,7 +55,30 @@ public class validParenthisis {
         }
         return stack.isEmpty();
     }
+
+
+    static boolean isValid2(String s){
+
+        Stack<Character> stack = new Stack();
+        Map<Character, Character> map = new HashMap<>();
+        map.put(')', '(');
+        map.put('}', '{');
+        map.put(']', '[');
+
+        for(char ch : s.toCharArray()){
+            if(map.containsKey(ch)){
+                if(stack.isEmpty() || stack.pop() != map.get(ch)){
+                    return false;
+                }
+            } else {
+                stack.push(ch);
+            }
+        }
+        return stack.isEmpty();
+    }
     public static void main(String[] args) {
-        
+        System.out.println(isValid2("()[]{}")); // true
+        System.out.println(isValid2("(]"));     // false
+    
     }
 }

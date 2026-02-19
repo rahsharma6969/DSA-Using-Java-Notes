@@ -2,7 +2,7 @@
 import java.util.Arrays;
 
 class stack {
-    int top;
+    int top; // to track the top index of the stack
     int capacity;
     int [] stackArr;
 

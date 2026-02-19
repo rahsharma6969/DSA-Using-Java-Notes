@@ -1,14 +1,15 @@
 public class reverseString {
 
-    static void reverse(String str){
-        int idx = str.length();
-        if(idx == 0 ){
-             return ;
-        }
-        System.out.println(str.charAt(idx-1));
-        reverse(str.substring(0, idx - 1));
+    public static String reverse(String s) {
+    if (s.length() == 0) {
+        return "";
     }
+
+    return reverse(s.substring(1)) + s.charAt(0);
+}
+    
  public static void main(String[] args) {
-    reverse("abcd");
+    System.out.println(reverse("abcd"));
+    
  }   
 }
