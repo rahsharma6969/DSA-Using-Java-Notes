@@ -2,7 +2,7 @@ public class Queue {
     int front , rear , size;
     int capacity;
     int [] queueArr;
-    public Queue(int size){
+    public Queue(int size){ /// constructor to initialize the queue
         this.capacity = size;
         this.queueArr = new int[size];
         this.front = 0;
@@ -10,14 +10,14 @@ public class Queue {
         this.size = 0;
     }
 
-    // enqueue operation
+    // enqueue operation for normal queue
     public void enqueue(int val){
         if(size == capacity){
             System.out.println("Queue is full");
         } else {
-            rear = (rear + 1) % capacity; // circular increment
+            rear += 1;
+            rear = rear % capacity; // circular increment
             queueArr[rear] = val;
-            size++;
         }
     }
 

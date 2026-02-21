@@ -44,6 +44,26 @@ class Queue{
         return nodetoDel.data;
     }
 
+    int front(){
+        if(this.front == null){
+            System.out.println("Queue is empty");
+            return -1;
+        }
+        return this.front.data;
+    }
+
+    void display(){
+        if(this.front == null){
+            System.out.println("Queue is empty");
+        } else {
+           Node temp = this.front;
+           while(temp != null){
+            System.out.println(temp.data + " >");
+            temp = temp.next;
+           }
+        }
+    }
+
 
 }
 
