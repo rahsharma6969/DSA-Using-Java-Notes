@@ -5,9 +5,12 @@ Medium
 Topics
 premium lock icon
 Companies
-Given a circular integer array nums (i.e., the next element of nums[nums.length - 1] is nums[0]), return the next greater number for every element in nums.
+Given a circular integer array nums (i.e., the next element of nums[nums.length - 1] is nums[0]),
+ return the next greater number for every element in nums.
 
-The next greater number of a number x is the first greater number to its traversing-order next in the array, which means you could search circularly to find its next greater number. If it doesn't exist, return -1 for this number.
+The next greater number of a number x is the first greater number to its traversing-order next in the array,
+ which means you could search circularly to find its next greater number. 
+ If it doesn't exist, return -1 for this number.
 
  
 
@@ -23,7 +26,8 @@ Example 2:
 Input: nums = [1,2,3,4,3]
 Output: [2,3,4,-1,4]
 */
-import  java.util.*;
+import  java.util.Arrays;
+import java.util.Stack;
 public class NextGreaterElement2 {
 
     // Brute force approach
@@ -49,24 +53,19 @@ public class NextGreaterElement2 {
     static int[] NextGreaterElement(int[] nums){
         int n = nums.length;
         int[] ans = new int[n];
-
-        Stack<Integer> stack = new Stack<>();
         Arrays.fill(ans, -1);
-
-        for (int i = 0; i < 2*n; i++) {
-            int circularIdx = i % n;
-           while (!stack.isEmpty() && nums[stack.peek()] <= nums[circularIdx]) {
-                stack.pop();
+        Stack<Integer> stack = new Stack<>(); // we will find next greater element of nums using stack
+        for(int i= 0; i< 2 * n; i++){
+            int circularIdx = i % n; // to traverse circularly ex if i = 5 and n = 3 then circularIdx will be 2
+            while(!stack.isEmpty() && nums[stack.peek()] < nums[circularIdx]){
+                ans[stack.pop()] = nums[circularIdx];
             }
-
-            if (i < n && !stack.isEmpty()) {
-                ans[circularIdx] = nums[stack.peek()];
+            if(i < n){ 
+                stack.push(circularIdx);
             }
-
-            stack.push(circularIdx);
         }
-    
-       return ans;
+        
+        return ans;
 
     }
     public static void main(String[] args) {

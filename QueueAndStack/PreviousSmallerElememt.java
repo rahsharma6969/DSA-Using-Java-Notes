@@ -1,5 +1,5 @@
-import java.util.Stack;
 import java.util.ArrayList;
+import java.util.Stack;
 /*
   Previous Smaller Element
 Last Updated : 12 Sep, 2025
@@ -17,6 +17,7 @@ Input: arr[] = [1, 5, 0, 3, 4, 5]
 Output: [-1, 1, -1, 0, 3, 4]
 
 */
+
 public class PreviousSmallerElememt {
 
     static ArrayList<Integer> previousSmallerElement(int[] arr){
@@ -38,8 +39,26 @@ public class PreviousSmallerElememt {
                 stack.push(arr[i]);
             }
             return result;
-    
-    
+    }
+
+    static ArrayList<Integer> previousSmallerElement2(int[] arr){
+        int n = arr.length;
+        Stack<Integer> stack = new Stack<>();
+         ArrayList<Integer> result = new ArrayList<>();
+        for(int i=n-1; i>=0; i--){
+            while(!stack.isEmpty() && stack.peek() > arr[i]){
+                stack.pop();
+            }
+            if(stack.isEmpty()){
+                result.add(-1);
+            } else {
+                result.add(stack.peek());
+            }
+
+            stack.push(arr[i]);
+
+        }
+        return result;
     }
     public static void main(String[] args) {
         

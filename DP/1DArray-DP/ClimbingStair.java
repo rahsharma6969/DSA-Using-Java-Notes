@@ -11,6 +11,8 @@ explanation: There are three ways to climb to the top.
 3. 2 steps + 1 step 
 
 */
+
+// we have to either pick or not pick from 1 or 2 steps, so we can use recursion to solve this problem
 public class ClimbingStair {
 
     // time complexity: O(2^n)

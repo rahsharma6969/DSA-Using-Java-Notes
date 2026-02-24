@@ -23,7 +23,8 @@ Explanation: The next greater element for each value of nums1 is as follows:
 - 2 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.
 */
 import java.util.*;
-
+import java.util.Stack;
+import java.util.Arrays;
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {  // but time complexity is O(n*m)
         int [] ans = new int[nums1.length];
