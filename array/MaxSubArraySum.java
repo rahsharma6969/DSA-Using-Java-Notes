@@ -25,21 +25,19 @@ import java.util.*;
 
 public class MaxSubArraySum {
     static int maxSubArray(int[] nums) {
-        int maxSum = 0;
-        int currSum = 0;
-
-        for (int i = 0; i < nums.length; i++) {
-
+       int currSum = 0;
+        int maxSum = Integer.MIN_VALUE;
+        
+        for(int i=0; i<nums.length ; i++){
             currSum += nums[i];
-            // maxSum = Math.max(currSum, maxSum);
-            if (currSum < 0) {
+            maxSum = Math.max(maxSum, currSum);
+            if(currSum<0){
                 currSum = 0;
             }
-            maxSum = Math.max(currSum, maxSum);
         }
-
         return maxSum;
 
+        
     }
 
     public static void main(String[] args) {

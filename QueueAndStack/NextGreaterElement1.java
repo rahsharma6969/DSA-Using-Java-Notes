@@ -55,7 +55,7 @@ class Solution {
     // Optimized approach using stack
     public int[] nextGreaterElementOptimized(int[] nums1, int[] nums2){
         int n = nums2.length;
-        Map<Integer, Integer> map = new HashMap<>(); // we will next greater element of nums2 in this map
+        Map<Integer, Integer> map = new HashMap<>(); // we will store next greater element of nums2 in this map
         Stack<Integer> stack = new Stack<Integer>(); // find next greater element of nums2 using stack
 
         for(int i=0 ; i<n ; i++){

@@ -1,4 +1,24 @@
 // constant sliding window approach to find maximum average of subarrays of size k
+/*
+643. Maximum Average Subarray I
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+You are given an integer array nums consisting of n elements, and an integer k.
+
+Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value. Any answer with a calculation error less than 10-5 will be accepted.
+
+ 
+
+Example 1:
+
+Input: nums = [1,12,-5,-6,50,3], k = 4
+Output: 12.75000
+Explanation: Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75
+
+*/
 
 class Solution {
     // brute force approach to find maximum average of subarrays of size k
@@ -30,25 +50,24 @@ class Solution {
     // space complexity: O(1)
 
     public double findMaxAverageOptimized(int[] nums, int k) {
-        
-        int windowSum = 0;
+        int windowSum =0 ;
 
-        // Step 1: sum of first k elements
-        for (int i = 0; i < k; i++) {
-            windowSum += nums[i];
-        }
+       for(int i=0;i<k;i++){
+        windowSum += nums[i];
+       }
+       double maxSum = windowSum;
 
-        int maxSum = windowSum;
+       for(int right=k; right<nums.length; right++){
+        windowSum += nums[right];
+        windowSum -= nums[right - k];
 
-        // Step 2: slide the window
-        for (int i = k; i < nums.length; i++) {
-            windowSum += nums[i];        // add new element
-            windowSum -= nums[i - k];    // remove old element
-            maxSum = Math.max(maxSum, windowSum);
-        }
+        maxSum = Math.max(windowSum , maxSum);
+       }
+       double maxAvg = maxSum/k;
+       return maxAvg;
 
-        // Step 3: return average
-        return (double) maxSum / k;
+    
+       
     }
 }
 

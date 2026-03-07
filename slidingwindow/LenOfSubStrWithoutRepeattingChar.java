@@ -20,20 +20,22 @@ Explanation: The answer is "b", with the length of 1. */
 import java.util.HashSet;
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        int maxLength = 0;
-        HashSet<Character> set = new HashSet<>();
-        int left = 0;
-        for (int right = 0; right < s.length(); right++) {
-            char currentChar = s.charAt(right);
-            while (set.contains(currentChar)) {
-                set.remove(s.charAt(left));
-                left++;
-            }
-            set.add(currentChar);
-            maxLength = Math.max(maxLength, right - left + 1); // because index starts from 0 and length from 1
-            // reason behind right - left + 1 is that right and left are both inclusive indices of the current substring.
-        }
-        return maxLength;
+       int maxLen = 0;
+       int left = 0;
+
+       HashSet<Character> set = new HashSet<>();
+
+       for(int right = 0; right < s.length(); right++){
+        char currentchar = s.charAt(right);
+           while(set.contains(currentchar)){
+               set.remove(s.charAt(left));
+               left++;
+           }
+            set.add(currentchar);
+            maxLen = Math.max(maxLen, right - left + 1);
+       }
+       return maxLen;
+
     }
 }
 

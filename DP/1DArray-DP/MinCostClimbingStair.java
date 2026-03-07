@@ -44,8 +44,8 @@ class Solution {
     if (idx == 1) return cost[1];
 
     return cost[idx] + Math.min(
-            minCost(cost, idx - 1),
-            minCost(cost, idx - 2)
+            minCost(cost, idx - 1), 
+            minCost(cost, idx - 2) 
     );
 }
 public int minCostClimbingStairs(int[] cost) {

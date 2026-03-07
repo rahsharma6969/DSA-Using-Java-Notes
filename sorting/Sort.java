@@ -1,49 +1,61 @@
+package sorting;
 
-import java.util.*;
 public class Sort {
-    
-    static void selectionSort(int[ ] arr){
-          
-        for(int i=0; i < arr.length - 1; i++){
-            int smallest = i;
-            for(int j = i+1; j< arr.length; j++){
-                if(arr[smallest] >arr[j] ){
-                    smallest = j;
-                }
-    
-                }
-                if(smallest != i){
-                 int temp = arr[i];
-                 arr[i]  = arr[smallest];
-                 arr[smallest] = temp;
-                }
-                
-            }
-        }
-    
+// time complexity of bubble sort is O(n^2) and space complexity is O(1)
+   public static void bubbleSort(int[] arr){
+    int n = arr.length;
 
-
-    static void bubbleSort(int[] arr){  // Time Complexity O(n^2)
-        int n = arr.length;
-
-        for(int i=0; i<n-1;i++){
-            for(int j=0; j<n-1-i;j++){
-                if(arr[j] > arr[j+1]){
-                    int temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
-                }
+    for(int i=0;i<n; i++){
+        for(int j=0; j<n-i-1; j++) {
+            if(arr[j] > arr[j+1]){
+                int temp =arr[j+1];
+                arr[j+1] = arr[j];
+                arr[j] = temp;
             }
         }
     }
+   }
+   static int findSmallest(int arr[], int smallest){
+    int n = arr.length;
+    for(int j = smallest+1; j<n; j++){
+            if(arr[j] < arr[smallest]){
+                smallest = j;
+            }
+        }
+        return smallest;
+   }
+   // time complexity of selection sort is O(n^2) and space complexity is O(1)
+   static void selectionSort(int[] arr) {
+    int n = arr.length;
+    
+    for(int i=0; i<n-1; i++){
+        int smallest = findSmallest(arr,i);
+        int temp = arr[smallest];
+        arr[smallest] = arr[i];
+        arr[i] = temp;    
+    }
+   }
+
+   static void insertionSort(int[] arr){
+     int n = arr.length;
+     for(int i=0; i<n; i++){
+        int key = arr[i];
+        int j = i-1;
+        while(j>=0 && arr[j] > key){
+            arr[j+1] = arr[j];
+            j--;
+        }
+        arr[j+1] = key;
+     }
+   }
+
     public static void main(String[] args) {
         // int [] arr = new int[];
         int[] arr   = {7,8,2,3,1};
         bubbleSort(arr);
-        System.out.println("Bubble Sort"+Arrays.toString(arr));
-        // selectionSort(arr);
-        // System.out.println("Selection Sort"+Arrays.toString(arr));
+        for(int i=0; i<arr.length; i++){
+            System.out.print(arr[i] + " ");
+        }
         
     }
-
 }

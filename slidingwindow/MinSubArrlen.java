@@ -1,6 +1,3 @@
-package slidingwindow;
-
-
 class Solution{
 
     // brute force approach
@@ -23,8 +20,6 @@ class Solution{
 
     //  using two pointers and sliding window approach
     public int minSubArrayLen(int target, int[] nums) {
-         
-
         int n = nums.length;
         int left = 0;
         int sum = 0;
