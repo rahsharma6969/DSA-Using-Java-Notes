@@ -3,7 +3,9 @@
 Easy
 
 Hint
-Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same.
+Given an integer array nums sorted in non-decreasing order,
+ remove the duplicates in-place such that each unique element appears only once. 
+ The relative order of the elements should be kept the same.
 
 Consider the number of unique elements in nums to be k​​​​​​​​​​​​​​. After removing duplicates, return the number of unique elements k.
 
@@ -45,7 +47,8 @@ class Solutions {
 
     int i = 0;
     for (int num : set) {
-        nums[i++] = num;
+        nums[i] = num;
+        i++;
     }
 
     return set.size();

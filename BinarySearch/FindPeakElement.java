@@ -27,20 +27,21 @@ Explanation: Your function can return either index number 1 where the peak eleme
 
 class Solution {
     public int findPeakElement(int[] nums) {
-        int low = 0, high = nums.length - 1;
+       int low  = 0 ;
+       int high = nums.length;
 
-        while (low < high) {
-            int mid = low + (high - low) / 2;
+       while(low <= high){
+        int mid  = low + (high - low) / 2;
 
-            if (nums[mid] > nums[mid + 1]) {
-                // decreasing slope → peak is at mid or left
-                high = mid;
-            } else {
-                // increasing slope → peak is on right
-                low = mid + 1;
-            }
+        if(nums[mid] > nums[mid-1] && nums[mid] > nums[mid + 1]){
+            high = mid;
+        } else if(nums[mid] < nums[high]){
+            low = mid + 1;
+        } else{
+            high = mid-1;
         }
-        return low; // or high (same)
+       }
+      return high;
     }
 }
 
