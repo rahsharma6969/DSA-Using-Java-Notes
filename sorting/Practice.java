@@ -1,5 +1,3 @@
-package sorting;
-
 /*Sort First Half Ascending & Second Half Descending
 input: 1 2 3 4 5 6 7 8
 output: 1 2 3 4 8 7 6 5
@@ -11,7 +9,25 @@ import java.util.HashMap;
 
 public class Practice {
 
-   
+static void sortHalfAsscendingHalfDescending1(int[] arr) {
+    int n = arr.length;
+    int mid =n / 2;
+
+    Arrays.sort(arr);
+
+    // first half
+    int i = mid ;
+    int j = n-1;
+ 
+        while( i < j ){
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;
+        }
+    }
+
 // time complexity of this approach is O(nlogn) and space complexity is O(1)
 static void sortHalfAsscendingHalfDescending(int[] arr){
     int n = arr.length;
@@ -62,16 +78,16 @@ static void sortBasedOnFrequency(int[] arr) {
 }
     public static void main(String[] args) {
         int[] arr = {1,2,3,4,5,6,7,8};
-         sortHalfAsscendingHalfDescending(arr);
+         sortHalfAsscendingHalfDescending1(arr);
             for(int i=0; i<arr.length; i++){
                 System.out.print(arr[i] + " ");
     }
 
-            System.out.println();
-            int[] arr2 = {2,3,2,4,5,12,2,3,3,3,12};
-            sortBasedOnFrequency(arr2);
-            for(int i=0; i<arr2.length; i++){
-                System.out.print(arr2[i] + " ");
-            }
+            // System.out.println();
+            // int[] arr2 = {2,3,2,4,5,12,2,3,3,3,12};
+            // sortBasedOnFrequency(arr2);
+            // for(int i=0; i<arr2.length; i++){
+            //     System.out.print(arr2[i] + " ");
+            // }
   }
 }

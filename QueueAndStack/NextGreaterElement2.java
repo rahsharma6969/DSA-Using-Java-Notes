@@ -60,7 +60,7 @@ public class NextGreaterElement2 {
             while(!stack.isEmpty() && nums[stack.peek()] < nums[circularIdx]){
                 ans[stack.pop()] = nums[circularIdx];
             }
-            if(i < n){ 
+            if(i < n){ // 
                 stack.push(circularIdx);
             }
         }

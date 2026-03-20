@@ -12,15 +12,15 @@ class ListNode {
 
 public class ReverseLL {
 
-    ListNode reverse(ListNode head){
-
+    ListNode reverse(ListNode head){  
+        
         if(head == null ) return null;
         if(head.next == null) return head;
         
         ListNode  prev = null;
         ListNode curr = head;
 
-        while(curr.next != null){
+        while(curr != null){
             ListNode next = curr.next;
 
             curr.next = prev;
@@ -29,6 +29,7 @@ public class ReverseLL {
         }
 
         return prev;
+       
        
 
     }

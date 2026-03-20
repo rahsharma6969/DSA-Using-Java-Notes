@@ -7,7 +7,7 @@ public class digits {
         while (n != 0) {
             int digit = n % 10;
             sum += digit;
-            // System.out.println(digit);
+            System.out.println(digit);
 
             n = n / 10;
         }
@@ -39,6 +39,16 @@ public class digits {
         return og == reversed;
     }
 
+    static void checkLeapYear(int year) {
+
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+            System.out.println("Leap Year");
+        } else {
+            System.out.println("Not a Leap Year");
+        }
+
+    }
+
     public static void main(String[] args) {
         System.out.println(printDigits(3548));
         // if(isArmstrongNumber(133)){
@@ -48,9 +58,9 @@ public class digits {
         // }
         // }
         // if (isPalindrome(21)) {
-        //     System.out.println("Palindrom Numer");
+        // System.out.println("Palindrom Numer");
         // } else {
-        //     System.out.println("not an palindrom");
+        // System.out.println("not an palindrom");
         // }
     }
 

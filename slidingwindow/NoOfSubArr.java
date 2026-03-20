@@ -1,12 +1,14 @@
 package slidingwindow;
 /*
-1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
+
+
 Medium
 Topics
 premium lock icon
 Companies
 Hint
-Given an array of integers arr and two integers k and threshold, return the number of sub-arrays of size k and average greater than or equal to threshold.
+Given an array of integers arr and two integers k and threshold,
+ return the number of sub-arrays of size k and average greater than or equal to threshold.
 
  
 
