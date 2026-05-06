@@ -24,51 +24,26 @@ class TreeNode {
  * }
  */
 class Solution {
-    int diameter = 0;
+    int diameter = 0; // global variable to keep track of the diameter
 
-    public int diameterOfBinaryTree(TreeNode root) {
+   public int diameterOfBinaryTree(TreeNode root) {
         height(root);
-        return diameter;
-    }
+        return diameter; 
+   }
 
-    // returns height of tree
-    private int height(TreeNode node) {
-        if (node == null) return 0;
+   private int height(TreeNode root) {
+    if(root == null) return 0;
 
-        int left = height(node.left);
-        int right = height(node.right);
+    int left = height(root.left);
+    int right = height(root.right);
 
-        // update diameter at this node
-        diameter = Math.max(diameter, left + right);
+    diameter = Math.max(left + right , diameter); // update diameter if the path through the current node is larger
+    return 1 + Math.max(left , right); // for continuing the height calculation for parent nodes
+   }
 
-        // return height to parent
-        return 1 + Math.max(left, right);
-    }
+   
 }
 
-/**
- *  // compare the heights of left and right subtrees and reuturn the maximum
-    static int height(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        return 1 + Math.max(height(root.left), height(root.right));
-    }
-
-    static int diameterOfBinaryTree(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int leftHeight = height(root.left);
-        int rightHeight = height(root.right);
-        int diameterThroughRoot = leftHeight + rightHeight;
-        
-        int leftDiameter = diameterOfBinaryTree(root.left);
-        int rightDiameter = diameterOfBinaryTree(root.right);
-        
-        return Math.max(diameterThroughRoot, Math.max(leftDiameter, rightDiameter));
-    }  
- */
 
 public class Diameter {
     public static void main(String[] args) {

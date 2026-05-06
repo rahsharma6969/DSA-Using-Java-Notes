@@ -49,8 +49,7 @@ class Solutions {
     for (int num : set) {
         nums[i] = num;
         i++;
-    }
-
+    } 
     return set.size();
 }
 

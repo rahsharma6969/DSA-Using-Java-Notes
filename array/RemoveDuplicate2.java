@@ -15,7 +15,9 @@ then the first k elements of nums should hold the final result.
 It does not matter what you leave beyond the first k elements.
 
 Return k after placing the final result in the first k slots of nums.
-
+  example 1:
+Input: nums = [1,1,1,2,2,3]
+Output: 5, nums = [1,1,2,2,3,_]
  */
 class  Solution {
   public int removeDuplicates(int[] nums) {

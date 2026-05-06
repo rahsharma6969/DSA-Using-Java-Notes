@@ -32,12 +32,12 @@ Example 3:
 Input: s = "(]"
 
 Output: false */
-import java.util.Stack;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
 public class validParenthisis {
-
-    static boolean isValid(String s){
+      // exampl : "({[]})"
+    static boolean isValid(String s){ // time complexity of this approach is O(n) and space complexity is O(n)
         Stack<Character> stack = new Stack();
       
         for(char ch : s.toCharArray()){
@@ -58,7 +58,7 @@ public class validParenthisis {
 
 
     static boolean isValid2(String s){
-
+       // example : "({[]})"
         Stack<Character> stack = new Stack();
         Map<Character, Character> map = new HashMap<>();
         map.put(')', '(');
