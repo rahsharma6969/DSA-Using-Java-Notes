@@ -14,23 +14,17 @@ public class ReverseLL {
 
     ListNode reverse(ListNode head){  
         
-        if(head == null ) return null;
-        if(head.next == null) return head;
-        
-        ListNode  prev = null;
-        ListNode curr = head;
+       if( head == null || head.next == null) return head;
+       ListNode prev = null;
+       ListNode curr = head;
 
-        while(curr != null){
-            ListNode next = curr.next;
-
-            curr.next = prev;
-            prev = curr;
-            curr = next;
-        }
-
-        return prev;
-       
-       
+       while(curr != null) {
+        ListNode next =curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+       }
+       return prev;
 
     }
     public static void main(String[] args) {
@@ -40,6 +34,14 @@ public class ReverseLL {
         head.next.next.next = new ListNode(4);
         head.next.next.next.next = new ListNode(5);
 
+        ReverseLL obj = new ReverseLL();
+        ListNode newHead = obj.reverse(head);
+        // Print the reversed linked list
+        ListNode curr = newHead;
+        while(curr != null) {
+            System.out.print(curr.data + " ");
+            curr = curr.next;
+        }
       
         
     

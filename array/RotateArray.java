@@ -29,10 +29,11 @@ class Solution{
      public void rotate(int[] nums, int k) {
         ArrayList<Integer> temp = new ArrayList<>();
         int n = nums.length;
+        k = k % n; // Handle cases where k is larger than the array length
         for (int i = n - k; i < n; i++) {
-        temp.add(nums[i]);
-    }
-        for(int i=0;i<n-k; i++){
+            temp.add(nums[i]);
+        }
+        for (int i = 0; i < n - k; i++) {
             temp.add(nums[i]);
         }
         for(int i=0;i<n;i++){

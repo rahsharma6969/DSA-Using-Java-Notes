@@ -12,18 +12,14 @@ public class MiddleLL {
 
     // Function to find the middle of the linked list
     ListNode findMiddle(ListNode head) {
-        if (head == null) return null;
-
+       if(head == null) return null;
         ListNode slow = head;
-        ListNode fast = head;
-
-        // Move fast by 2 and slow by 1 step
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        return slow; // slow will be at the middle
+        ListNode fast = head;   
+       while(fast != null && fast.next !=null) {
+        slow = slow.next;
+        fast = fast.next.next;
+       }
+       return slow;
     }
 
     public static void main(String[] args) {

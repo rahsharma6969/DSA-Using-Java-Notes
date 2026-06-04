@@ -56,35 +56,26 @@ class Solutions{
         int n = nums.length;
         int[] result = new int[n];
     
-             int[] prefixProducts = new int[n];
-             int[] suffixProducts = new int[n];
-
-             // Calculate prefix products
-                prefixProducts[0] = 1;
-                for (int i = 1; i < n; i++) {
-                    prefixProducts[i] = prefixProducts[i - 1] * nums[i - 1];
-                }
-
-                // Calculate suffix products
-                suffixProducts[n - 1] = 1;
-                for (int i = n - 2; i >= 0; i--) {
-                    suffixProducts[i] = suffixProducts[i + 1] * nums[i + 1];
-                }
-
-                // Calculate result
-                for (int i = 0; i < n; i++) {
-                    result[i] = prefixProducts[i] * suffixProducts[i];
-                }
-            
-            return result;
+        result[0] = 1;
+        for (int i = 1; i < n; i++) {
+            result[i] = result[i - 1] * nums[i - 1];
         }
+
+        int suffixProduct = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            result[i] = result[i] * suffixProduct;
+            suffixProduct = suffixProduct * nums[i];
+        }
+            
+        return result;
+    }
 }
 
 public class ProductOfArr {
     public static void main(String[] args) {
         Solutions sol = new Solutions();
         int[] nums = {1, 2, 3, 4};
-        int[] result = sol.productExceptSelf(nums);
+        int[] result = sol.productExceptSelfOptimized(nums);
         System.out.print("Product of array except self: ");
         for(int i=0;i<result.length;i++){
             System.out.print(result[i] + " ");

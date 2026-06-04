@@ -13,16 +13,16 @@ class Pair {
     }
 }
 
-class Graph {
+class WeightedGraph {
     
     private ArrayList<Pair>[] adjList;  // adjacency list representation of graph with weights
 
-    public Graph() {
+    public WeightedGraph() {
         this(10);
     }
 
     
-    public Graph(int vertices){
+    public WeightedGraph(int vertices){
         adjList = new ArrayList[vertices]; // create array of arraylists 
         for(int j=0; j<vertices; j++){
             adjList[j] = new ArrayList<Pair>();
@@ -73,7 +73,7 @@ public class DijkstraAlgorithm {
 
     public static void main(String[] args) {
         System.out.println("Dijkstra's Algorithm implementation");
-        Graph graph = new Graph(5);
+        WeightedGraph graph = new WeightedGraph(5);
         graph.addEdge(0, 1, 10);
         graph.addEdge(0, 2, 3);
         graph.addEdge(1, 2, 1);

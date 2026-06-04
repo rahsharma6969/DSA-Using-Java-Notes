@@ -74,7 +74,7 @@ public class validParenthisis {
                 stack.push(ch);
             }
         }
-        return stack.isEmpty();
+        return stack.isEmpty(); // 
     }
     public static void main(String[] args) {
         System.out.println(isValid2("()[]{}")); // true

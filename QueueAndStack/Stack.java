@@ -1,57 +1,50 @@
 
 import java.util.Arrays;
 
-class stack {
-    int top; // to track the top index of the stack
+class Stack {
+    int[] stack;
+    int top;
     int capacity;
-    int [] stackArr;
 
-    public stack(int size){
+    Stack(int size) {
+        this.stack = new int[size];
         this.capacity = size;
-        this.stackArr = new int[size];
-        this.top = -1;
+        this.top = -1; // bez element in stack is represented by top = -1
     }
 
-    // push operation
-    public void push(int val){
-        if(top == capacity - 1){
-            System.out.println("Stack Overflow");
-        } else {
-            top++;
-            stackArr[top] = val;
-        }
+    void push (int x) {
+        if(top == capacity - 1) {
+            System.out.println("Stack overflow");
+            
+        } 
+        stack[++top] = x;
+      
     }
 
-    // pop operation
-    public int pop(){
-        if(isEmpty()){
-            System.out.println("Stack Underflow");
-            return -1;
+    void pop() {
+        if (top == -1) {          
+            System.out.println("Stack underflow");
         } else {
-            int val = stackArr[top];
+            int x = stack[top];
             top--;
-            return val;
+            System.out.println("Popped element: " + x);
         }
     }
 
-    // stack top
-    public int peek(){
-        if(isEmpty()){
+    int top () {
+        if(top == -1) {
             System.out.println("Stack is empty");
             return -1;
         } else {
-            return stackArr[top];
+            return stack[top];
         }
     }
 
-    // check if stack is empty
-    public boolean isEmpty(){
-        return top == -1;
-    }
-
-    // if stack is full
-    public boolean isFull(){
+    boolean isFull() {
         return top == capacity - 1;
+    }
+    boolean isEmpty() {
+        return top == -1;
     }
 }
 
@@ -60,6 +53,17 @@ class stack {
 
 public class Stack {
     public static void main(String[] args) {
+        Stack stack = new Stack(5);
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+        System.out.println("Top element: " + stack.top());
+        stack.pop();
+        System.out.println("Top element after pop: " + stack.top());
+
+        
         
     }
 }
