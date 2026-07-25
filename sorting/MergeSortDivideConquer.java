@@ -5,71 +5,52 @@ public class MergeSortDivideConquer {
     public static void main(String[] args) {
         int[] arr = {7, 8, 2, 3, 1, 9, 4};
         System.out.println("Original array: " + Arrays.toString(arr));
-        
+
         mergeSort(arr, 0, arr.length - 1);
-        
+
         System.out.println("Sorted array:   " + Arrays.toString(arr));
     }
 
-    public static void mergeSort(int[] arr, int low, int high) {
-        // Base case: subarray of size 0 or 1 is already sorted (Conquer trivial case)
-        if (low < high) {
-        
-            int mid = low + (high - low) / 2;  
-
-           
-            mergeSort(arr, low, mid);
-      
-            mergeSort(arr, mid + 1, high);
-
-          
-            merge(arr, low, mid, high);
+    static void mergeSort(int[] arr, int left, int right) {
+        if (left >= right) {
+            return;
         }
+
+        int mid = left + (right - left) / 2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
     }
 
-   
-    private static void merge(int[] arr, int low, int mid, int high) {
-        // Create temporary arrays for the two halves
-        int n1 = mid - low + 1;
-        int n2 = high - mid;
+    static void merge(int[] arr, int left, int mid, int right) {
+        int temp[] = new int[right - left + 1];
+        int i = left , j = mid + 1 , k=0;
 
-        int[] leftArr = new int[n1];
-        int[] rightArr = new int[n2];
-
-        // Copy data to temporary arrays
-        for (int i = 0; i < n1; i++)
-            leftArr[i] = arr[low + i];
-        for (int j = 0; j < n2; j++)
-            rightArr[j] = arr[mid + 1 + j];
-
-        // Merge the temporary arrays back into arr[low ... high]
-        int i = 0, j = 0; 
-        int k = low;       
-
-        // Compare and merge in sorted order
-        while (i < n1 && j < n2) {
-            if (leftArr[i] <= rightArr[j]) {
-                arr[k] = leftArr[i];
+        while(i <= mid && j <= right) {
+            if(arr[i] <= arr[j]) {
+                temp[k] = arr[i];
                 i++;
-            } else {
-                arr[k] = rightArr[j];
+            }else {
+                temp[k] = arr[j];
                 j++;
             }
             k++;
         }
 
-        // Copy remaining elements of leftArr[], if any
-        while (i < n1) {
-            arr[k] = leftArr[i];
+        while(i <= mid) {
+            temp[k] = arr[i];
             i++;
             k++;
         }
 
-        // Copy remaining elements of rightArr[], if any
-        while (j < n2) {
-            arr[k] = rightArr[j];
+        while(j <= right) {
+            temp[k] = arr[j];
             j++;
             k++;
+        }
+
+        for(int l=0 ; l<temp.length ; l++) {
+            arr[left + l] = temp[l];
         }
     }
 }

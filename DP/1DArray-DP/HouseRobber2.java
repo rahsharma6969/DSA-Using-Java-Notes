@@ -31,42 +31,49 @@ Input: nums = [1,2,3]
 Output: 3
  */
 
+import java.util.Arrays;
+
 
 class Solution {
 
-    public int maxCost(int[] nums, int start, int end) {
 
-        int prev2 = 0;
-        int prev1 = nums[start];
+    private int solve(int index, int[] nums, int start, int[] dp) {
 
-        for (int i = start + 1; i <= end; i++) {
-
-            int take = nums[i] + prev2;
-            int notTake = prev1;
-
-            int curr = Math.max(take, notTake);
-
-            prev2 = prev1;
-            prev1 = curr;
+        if(index < start) {
+            return 0;
         }
 
-        return prev1;
+        if(dp[index] != -1) {
+            return dp[index];
+        }
+
+        int pick = nums[index] + solve(index - 2, nums, start, dp);
+        int notPick = solve(index - 1, nums, start, dp);
+
+        return dp[index] = Math.max(pick, notPick);
     }
 
     public int rob(int[] nums) {
 
         int n = nums.length;
 
-        if (n == 1) return nums[0];
+        if(n == 1) {
+            return nums[0];
+        }
 
-        // Case 1: Exclude last house
-        int case1 = maxCost(nums, 0, n - 2);
+        // Case 1: houses [0 ... n-2]
+        int[] dp1 = new int[n];
+        Arrays.fill(dp1, -1);
+        int case1 = solve(n - 2, nums, 0, dp1);
 
-        // Case 2: Exclude first house
-        int case2 = maxCost(nums, 1, n - 1);
+        // Case 2: houses [1 ... n-1]
+        int[] dp2 = new int[n];
+        Arrays.fill(dp2, -1);
+        int case2 = solve(n - 1, nums, 1, dp2);
 
         return Math.max(case1, case2);
     }
+    // using memoization
 
 }
 

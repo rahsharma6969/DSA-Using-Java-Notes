@@ -22,7 +22,8 @@ Output: [-1, 1, -1, 0, 3, 4]
 */
 
 public class PreviousSmallerElememt {
-
+    // Time complexity: O(n)
+    // Space complexity: O(n)
     static ArrayList<Integer> previousSmallerElement(int[] arr){
        int n = arr.length;
 
@@ -43,23 +44,26 @@ public class PreviousSmallerElememt {
             }
             return result;
     }
-
+    // Time complexity: O(n)
+    // Space complexity: O(n)
     static ArrayList<Integer> previousSmallerElement2(int[] arr){
         int n = arr.length;
         Stack<Integer> stack = new Stack<>();
-         ArrayList<Integer> result = new ArrayList<>();
-        for(int i=n-1; i>=0; i--){
-            while(!stack.isEmpty() && stack.peek() > arr[i]){
+        ArrayList<Integer> result = new ArrayList<>();
+        int [] temp = new int[n];
+        Arrays.fill(temp, -1);
+
+        for(int i=0; i<n; i++) {
+            while(!stack.isEmpty() && arr[stack.peek()] >= arr[i]) {
                 stack.pop();
             }
-            if(stack.isEmpty()){
-                result.add(-1);
-            } else {
-                result.add(stack.peek());
+            if(!stack.isEmpty()) {
+                temp[i] = arr[stack.peek()];
             }
-
-            stack.push(arr[i]);
-
+            stack.push(i);
+        }
+        for(int i=0; i<n; i++) {
+            result.add(temp[i]);
         }
         return result;
     }

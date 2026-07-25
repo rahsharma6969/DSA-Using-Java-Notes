@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.List;
 
 class Pair {
     int node;
@@ -53,57 +54,48 @@ class Solution {
         return false;
     }
 
-    public boolean dfs(int node, int parent,
-                ArrayList<ArrayList<Integer>> adj,
-                boolean[] vis)  {
-        vis[node] = true;
-        for(int neighbour : adj.get(node)) {
-            if(!vis[neighbour]) {
-                // backtracking step to check for cycle in the graph
-                if(dfs(neighbour, node, adj, vis)) { 
-                    return true;
+
+
+    public boolean isCycleUsingDFS(int V, int[][] edges) {
+        // Step 1: Build adjacency list
+        List<List<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < V; i++) adj.add(new ArrayList<>());
+        for (int[] edge : edges) {
+            int u = edge[0], v = edge[1];
+            adj.get(u).add(v);
+            adj.get(v).add(u); // undirected graph
+        }
+
+        boolean[] visited = new boolean[V];
+
+        // Step 2: Check each component
+        for (int i = 0; i < V; i++) {
+            if (!visited[i]) {
+                if (dfs(i, -1, visited, adj)) {
+                    return true; // cycle found
                 }
-            } else if(neighbour != parent) {
-                return true;
             }
         }
-        return false;
+        return false; // no cycle
     }
 
-    // Using DFS 
-    public boolean isCycleDFS(int V, int[][] edges) {
-         // Create adjacency list
-        ArrayList<ArrayList<Integer>> adj =
-                new ArrayList<>();
+    // Step 3: DFS Helper Function
+    private boolean dfs(int node, int parent, boolean[] visited, List<List<Integer>> adj) {
+        visited[node] = true;
 
-        for(int i = 0; i < V; i++) {
-            adj.add(new ArrayList<>());
-        }
-
-        // Convert edges to graph
-        for(int[] edge : edges) {
-
-            int u = edge[0];
-            int v = edge[1];
-
-            adj.get(u).add(v);
-            adj.get(v).add(u);
-        }
-
-        boolean[] vis = new boolean[V];
-
-        // Check all components
-        for(int i = 0; i < V; i++) {
-            if(!vis[i]) {
-                if(dfs(i, -1, adj, vis)) {
+        for (int neighbor : adj.get(node)) {
+            if (!visited[neighbor]) {
+                if (dfs(neighbor, node, visited, adj))
                     return true;
-                }
+            } else if (neighbor != parent) {
+                return true; // cycle found
             }
         }
 
         return false;
     }
 }
+
 
 
 

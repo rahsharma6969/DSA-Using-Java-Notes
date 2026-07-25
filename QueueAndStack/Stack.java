@@ -1,67 +1,50 @@
 
-import java.util.Arrays;
-
-class Stack {
-    int[] stack;
+// stack.push(1);
+// int top = stack.peek(); // top element
+// int pooped = stack.pop(); // remove top element
+class ArrayStack {
+    int size;
     int top;
-    int capacity;
+    int[] stack;
+    int capacity = 1000 ;
 
-    Stack(int size) {
-        this.stack = new int[size];
-        this.capacity = size;
-        this.top = -1; // bez element in stack is represented by top = -1
+    ArrayStack() {
+        this.size = 0;
+        this.top = -1;
+        this.stack = new int[capacity];
     }
 
-    void push (int x) {
-        if(top == capacity - 1) {
-            System.out.println("Stack overflow");
-            
-        } 
-        stack[++top] = x;
-      
+    void push(int x) {
+        if(this.size == capacity) return;
+        this.top++;
+        this.stack[this.top] = x;
+        this.size++;
     }
 
-    void pop() {
-        if (top == -1) {          
-            System.out.println("Stack underflow");
-        } else {
-            int x = stack[top];
-            top--;
-            System.out.println("Popped element: " + x);
-        }
+    int pop() {
+        if(isEmpty()) return -1;
+        int topElement = this.stack[this.top];
+        this.top--;
+        this.size--;
+        return topElement;
     }
 
-    int top () {
-        if(top == -1) {
-            System.out.println("Stack is empty");
-            return -1;
-        } else {
-            return stack[top];
-        }
+    int peek() {
+        if(isEmpty()) return -1;
+        return this.stack[this.top];
     }
 
-    boolean isFull() {
-        return top == capacity - 1;
-    }
     boolean isEmpty() {
-        return top == -1;
+        return this.size ==0;
     }
-}
+} 
 
 
 
 
 public class Stack {
     public static void main(String[] args) {
-        Stack stack = new Stack(5);
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
-        stack.push(5);
-        System.out.println("Top element: " + stack.top());
-        stack.pop();
-        System.out.println("Top element after pop: " + stack.top());
+        
 
         
         

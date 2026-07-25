@@ -11,64 +11,77 @@ For Example
 If the given ‘HEIGHT’ array is [10,20,30,10], 
 the answer 20 as the frog can jump from 1st stair 
 to 2nd stair (|20-10| = 10 energy lost) and then a jump from 2nd stair 
-to last stair (|10-20| = 10 energy lost). So, the total energy lost is 20. */
+to last stair (|10-20| = 10 energy lost). So, the total energy lost is 20. 
+
+here  n is the length of the given array. n = heights.length  
+*/
 
 
 class Solution {
-    // using plain recursion
-    static int minEnergy(int n, int[] height){
-        if(n == 0) return 0; // base case: if the frog is on the first stair, no energy is lost
-        if (n == 1) return 0; // base case: if the frog is on the first stair, no energy is lost
+    public static int helper(int idx, int heights[]) {
+        if(idx <0) return 0;
+        if(idx==0) return 0;
+        if(idx == 1) return Math.abs(heights[1] - heights[0]);
 
+        int jumpOne = helper( idx -1 , heights) + Math.abs(heights[idx] - heights[idx-1]);
+        int jumpTwo = helper( idx -2 , heights) + Math.abs(heights[idx] - heights[idx-2]);
 
-        // recursive case: the frog can jump from (n-1)th stair or (n-2)th stair
-        int leftJump = minEnergy( n-1, height) + Math.abs( height[n - 1] - height[n - 2] ); // energy lost if the frog jumps from (n-1)th stair
-        int rightJump = Integer.MAX_VALUE;
-        if(n > 2) {
-            rightJump = minEnergy( n-2, height) + Math.abs( height[n - 1] - height[n - 3] ); // energy lost if the frog jumps from (n-2)th stair
-        }
-        
-        return Math.min(leftJump, rightJump);
+        return Math.min(jumpOne, jumpTwo);
+       
+     }
+     // plan recursion
+     public static int frogJump(int n, int heights[]) {
+       int idx = n - 1;
+       return helper(idx, heights);
+      
     }
 
-    // using dp with memoization
-    static int minEnergyMemo(int index, int[] height, int[] dp) {
+    // using memoization
+    public static int frogJumpMemo(int n, int heights[]) {
+        int[] dp = new int[n + 1];
+        for(int i = 0; i <= n; i++) {
+            dp[i] = -1;
+        }
+        int idx = n - 1;
+        return frogJumpMemo(idx, heights, dp);
+    }
 
-        // Base case: starting stair
-        if (index == 0)
-            return 0;
+    private static int frogJumpMemo(int idx, int heights[], int[] dp) {
+        if(idx <0) return 0;
+        if(idx==0) return 0;
+        if(idx == 1) return Math.abs(heights[1] - heights[0]);
+        if(dp[idx] != -1) return dp[idx];
 
-        // If already computed
-        if (dp[index] != -1)
-            return dp[index];
+        int jumpOne = frogJumpMemo( idx -1 , heights, dp) + Math.abs(heights[idx] - heights[idx-1]);
+        int jumpTwo = frogJumpMemo( idx -2 , heights, dp) + Math.abs(heights[idx] - heights[idx-2]);
 
-        // Jump from previous stair (index-1)
-        int left = minEnergyMemo(index - 1, height, dp) 
-                + Math.abs(height[index] - height[index - 1]);
+        return dp[idx] = Math.min(jumpOne, jumpTwo);
+       
+     }
 
+     // using tabulation
+     public static int frogJumpTab(int n, int heights[]) {
+     int [] dp = new int[n + 1];
+     dp[0] = 0;
+     for(int i=1; i<n; i++) {
+        int left = dp[i-1] + Math.abs(heights[i] - heights[i-1]);
         int right = Integer.MAX_VALUE;
-
-        // Jump from two stairs behind (index-2)
-        if (index > 1) {
-            right = minEnergyMemo(index - 2, height, dp) 
-                    + Math.abs(height[index] - height[index - 2]);
+        if(i > 1) {
+            right = dp[i-2] + Math.abs(heights[i] - heights[i-2]);
         }
-
-        // Store and return minimum
-        dp[index] = Math.min(left, right);
-        return dp[index];
-    }
+        dp[i] = Math.min(left, right);
+     }
+     return dp[n-1];
+     }
 }
+
+
+
+
 public class FrogJup {
     public static void main(String[] args) {
-        int[] height = {10, 20, 30, 10};
-        int n = height.length;
-        System.out.println(Solution.minEnergy(n, height));
-        int[] memo = new int[n + 1];
-        for(int i = 0; i < memo.length; i++) {
-            memo[i] = -1;
-        }
-        System.out.println(Solution.minEnergyMemo(n, height, memo));
+        int[] stones = {0,1,3,5,6,8,12,17};
+        Solution s = new Solution();
+        System.out.println(s.frogJumpTab(stones.length, stones));
     }
-    
 }

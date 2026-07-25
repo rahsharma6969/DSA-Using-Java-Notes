@@ -32,6 +32,7 @@ class Solution {
         if (n == 1) return nums[0];
         if (n == 2) return Math.max(nums[0], nums[1]);
 
+        
         return maxCost(nums, n - 1);
 
     }
@@ -70,3 +71,8 @@ public class MaxSumOFNonAdjacentElement {
         System.out.println(sol.findMaxSum(nums));
     }
 }
+
+
+/*
+recursive tree 
+ */

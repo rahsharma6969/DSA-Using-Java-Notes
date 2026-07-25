@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class SpiralMatrix {
+    
     static int [] spiral(int[][] mat){
         int m = mat.length; // no of rows
         int n  = mat[0].length; // no of columns
