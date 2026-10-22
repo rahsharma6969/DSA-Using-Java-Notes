@@ -12,7 +12,7 @@ class Solution {
          }
 
          for(int i=0 ;i <nums.length ; i++) {
-            if(!map.containsKey(nums[i])) {
+            if(!map.containsKey(nums[i])) { // 
                 map.put(nums[i] , true);
                 list.add(nums[i]);
                 helper(nums , index + 1 , result ,list , map);

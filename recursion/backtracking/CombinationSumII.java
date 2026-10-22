@@ -4,7 +4,8 @@ Medium
 Topics
 premium lock icon
 Companies
-Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates where the candidate numbers sum to target.
+Given a collection of candidate numbers (candidates) and a target number (target),
+find all unique combinations in candidates where the candidate numbers sum to target.
 
 Each number in candidates may only be used once in the combination.
 
@@ -37,20 +38,17 @@ import java.util.List;
 
 class Solution {
     void helper(int[] candidates, int target, int index, List<Integer> path, List<List<Integer>> result) {
-        if (target == 0) {
+        if (target < 0) {
+            return;
+        }
+        if(target == 0) {
             result.add(new ArrayList<>(path));
             return;
         }
-        if (target < 0 || index == candidates.length) {
-            return;
-        }
 
-        for (int i = index; i < candidates.length; i++) {
-            if (i > index && candidates[i] == candidates[i - 1]) { // skip duplicates
+        for(int i = index; i< candidates.length; i++) {
+            if(i < index || (i > index && candidates[i] == candidates[i-1])) {
                 continue;
-            }
-            if (candidates[i] > target) {
-                break;
             }
             path.add(candidates[i]);
             helper(candidates, target - candidates[i], i + 1, path, result);
@@ -59,6 +57,7 @@ class Solution {
     }
 
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        
         Arrays.sort(candidates);
         List<Integer> path = new ArrayList<>();
         List<List<Integer>> result = new ArrayList<>();

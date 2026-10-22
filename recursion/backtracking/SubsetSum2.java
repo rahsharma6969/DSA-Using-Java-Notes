@@ -28,7 +28,7 @@ class Solution {
 
     public void backtrack(int[] nums , int index , List<Integer> path , 
         List<List<Integer>> result) {
-            
+        
             result.add(new ArrayList<>(path));
             
             for(int i = index ; i < nums.length ; i++) {

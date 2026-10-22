@@ -25,36 +25,29 @@ import java.util.*;
 
 class Solution {
 
-    public void helper(int n, int open , int close , StringBuilder sb , List<String> result) {
+    void helper(List<String> result, String path, int open ,int close, int n) {
+      
+
+
         if(open == n && close == n) {
-            result.add(sb.toString());
+            result.add(path);
             return;
         }
         if(open < n) {
-            sb.append("(");
-            helper(n , open + 1 , close , sb , result);
-            sb.deleteCharAt(sb.length() - 1);
+            helper(result , path + "(" , open + 1 , close , n);
         }
         if(close < open) {
-            sb.append(")");
-            helper(n , open , close + 1 , sb , result);
-            sb.deleteCharAt(sb.length() - 1);
+            helper(result , path + ")" , open , close + 1 , n);
         }
 
-        
     }
-    public List<String> generateParenthesis(int n) {
-        //your code goes here
-        if(n == 0) {
-            return new ArrayList<>();
-        }
-        if( n== 1) {
-            return Arrays.asList("()");
-        }
 
+
+    public List<String> generateParenthesis(int n) {
         List<String> result = new ArrayList<>();
-        helper(n,0 , 0 , new StringBuilder() , result);
+        helper(result , "", 0 , 0 , n);
         return result;
+        
     }
 }
 

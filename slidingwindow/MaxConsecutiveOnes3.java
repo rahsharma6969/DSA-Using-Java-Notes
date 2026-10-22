@@ -26,24 +26,25 @@ Bolded numbers were flipped from 0 to 1. The longest subarray is underlined.
 class Solution {
     public int longestOnes(int[] nums, int k) {
 
-        int left = 0;
-        int zeroCount = 0;
         int maxLen = 0;
+        int left = 0;
+        int zeros = 0;
 
         for(int right = 0; right < nums.length; right++){
-
             if(nums[right] == 0){
-                zeroCount++;
+                zeros++;
             }
 
-            while(zeroCount > k){
+            while(zeros > k){
                 if(nums[left] == 0){
-                    zeroCount--;
+                    zeros--;
                 }
                 left++;
             }
 
             maxLen = Math.max(maxLen, right - left + 1);
+
+            
         }
 
         return maxLen;

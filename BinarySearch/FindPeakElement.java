@@ -5,7 +5,8 @@ Topics
 
 A peak element is an element that is strictly greater than its neighbors.
 
-Given a 0-indexed integer array nums, find a peak element, and return its index. If the array contains multiple peaks,
+Given a 0-indexed integer array nums, find a peak element, and return its index. 
+If the array contains multiple peaks,
  return the index to any of the peaks.
 
 You may imagine that nums[-1] = nums[n] = -∞. In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.
@@ -28,22 +29,22 @@ Explanation: Your function can return either index number 1 where the peak eleme
 
 class Solution {
     public int findPeakElement(int[] nums) {
-       int low  = 0 ;
-       int high = nums.length;
+      int lo = 0 , hi = nums.length - 1;
 
-       while(low <= high){
-        int mid  = low + (high - low) / 2;
+      while(lo < hi) {
+        int mid = lo + (hi - lo) / 2;
 
-        if(nums[mid] > nums[mid-1] && nums[mid] > nums[mid + 1]){
-            high = mid;
-        } else if(nums[mid] < nums[high]){
-            low = mid + 1;
-        } else{
-            high = mid-1;
+        if(nums[mid] < nums[mid + 1]) {
+          lo = mid + 1;
+        } else {
+          hi = mid;
         }
-       }
-      return high;
+      }
+        
+      return lo;
     }
+
+   
 }
 
 

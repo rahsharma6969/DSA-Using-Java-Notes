@@ -1,0 +1,67 @@
+/*
+Allocate Minimum Pages
+Difficulty: MediumAccuracy: 35.51%Submissions: 478K+Points: 4Average Time: 35m
+Given an array arr[] of integers, where each element arr[i] represents the number of pages in the i-th book. You also have an integer k representing the number of students. The task is to allocate books to each student such that:
+
+Each student receives atleast one book.
+Each student is assigned a contiguous sequence of books.
+No book is assigned to more than one student.
+All books must be allocated.
+The objective is to minimize the maximum number of pages assigned to any student. In other words, out of all possible allocations, find the arrangement where the student who receives the most pages still has the smallest possible maximum. If it is not possible to allocate books to all students, return -1;
+
+Examples:
+
+Input: arr[] = [12, 34, 67, 90], k = 2
+Output: 113
+Explanation: Allocation can be done in following ways:
+=> [12] and [34, 67, 90] Maximum Pages = 191
+=> [12, 34] and [67, 90] Maximum Pages = 157
+=> [12, 34, 67] and [90] Maximum Pages = 113.
+The third combination has the minimum pages assigned to a student which is 113.
+Input: arr[] = [15, 17, 20], k = 5
+Output: -1
+Explanation: Since there are more students than total books, 
+it's impossible to allocate a book to each student. */
+
+class Solution {
+
+    private int findMinimumMaximumPages(int[] arr, int start, int studentsLeft) {
+        int n = arr.length;
+
+        if (studentsLeft == 1) {
+            int pagesForLastStudent = 0;
+            for (int i = start; i < n; i++) {
+                pagesForLastStudent += arr[i];
+            }
+            return pagesForLastStudent;
+        }
+
+        int minimumMaximumPages = Integer.MAX_VALUE;
+        int pagesForCurrentStudent = 0;
+
+        // Leave at least one book for each remaining student.
+        for (int end = start; end <= n - studentsLeft; end++) {
+            pagesForCurrentStudent += arr[end];
+
+            int pagesForRemainingStudents =
+                    findMinimumMaximumPages(arr, end + 1, studentsLeft - 1);
+            int maximumPages = Math.max(pagesForCurrentStudent, pagesForRemainingStudents);
+            minimumMaximumPages = Math.min(minimumMaximumPages, maximumPages);
+        }
+
+        return minimumMaximumPages;
+    }
+
+    public int findPages(int[] arr, int k) {
+        int n = arr.length;
+        if (k <= 0 || k > n) {
+            return -1;
+        }
+
+        return findMinimumMaximumPages(arr, 0, k);
+    }
+}
+
+public class bookAllocation {
+    
+}

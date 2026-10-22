@@ -37,8 +37,7 @@ class Solution {
         int d = triangle.get(i).get(j) + calculate(i+1, j, triangle, n);
         int dg = triangle.get(i).get(j) + calculate(i+1, j+1, triangle, n);
         return Math.min(d, dg);
-        // return triangle.get(i).get(j) + Math.min(calculate(i+1, j, triangle, n), 
-        // calculate(i+1, j+1, triangle, n));
+        
     }
     public int minimum(List<List<Integer>> triangle) {
         int n = triangle.size();
@@ -46,6 +45,8 @@ class Solution {
     }
 
     // memoization approach
+    // time complexity : O(n^2) because we are storing the result of each subproblem in a 2D array and we are solving each subproblem only once.
+    // space complexity : O(n^2) for the dp array + O(n) for
     int calculateMemo(int i, int j, List<List<Integer>> triangle, int n, int[][] dp){
         if(i == n-1) return triangle.get(i).get(j);
         if(dp[i][j] != -1) return dp[i][j];

@@ -65,16 +65,18 @@ public class validParenthisis {
         map.put('}', '{');
         map.put(']', '[');
 
-        for(char ch : s.toCharArray()){
-            if(map.containsKey(ch)){
-                if(stack.isEmpty() || stack.pop() != map.get(ch)){
+        for(char ch : s.toCharArray()) {
+            if(map.containskey(ch)) {
+                if(stack.isEmpty() || stack.pop() != map.get(ch)) {
                     return false;
                 }
-            } else {
+
+            }else {
+                
                 stack.push(ch);
             }
         }
-        return stack.isEmpty(); // 
+        return stack.isEmpty();
     }
     public static void main(String[] args) {
         System.out.println(isValid2("()[]{}")); // true

@@ -4,7 +4,8 @@ Medium
 Topics
 premium lock icon
 Companies
-Given an n x n array of integers matrix, return the minimum sum of any falling path through matrix.
+Given an n x n array of integers matrix, return the minimum sum of any
+falling path through matrix.
 
 A falling path starts at any element in the first row and chooses the element 
 in the next row that is either directly below or diagonally left/right.
@@ -17,7 +18,6 @@ Explanation: There are two falling paths with a minimum sum as shown.*/
 
 // Note : This problem is similar to triangle problem 
 import java.util.Arrays;
-import java.util.*;
 
 class Solution {
 

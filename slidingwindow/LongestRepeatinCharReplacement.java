@@ -4,9 +4,12 @@ Medium
 Topics
 premium lock icon
 Companies
-You are given a string s and an integer k. You can choose any character of the string and change it to any other uppercase English character. You can perform this operation at most k times.
+You are given a string s and an integer k. You can choose any character of the string
+and change it to any other uppercase English character. 
+You can perform this operation at most k times.
 
-Return the length of the longest substring containing the same letter you can get after performing the above operations.
+Return the length of the longest substring containing the same letter you can get after 
+performing the above operations.
 
  
 
@@ -23,24 +26,48 @@ Explanation: Replace the one 'A' in the middle with 'B' and form "AABBBBA".
 The substring "BBBB" has the longest repeating letters, which is 4.
 There may exists other ways to achieve this answer too.
   */
+
+import java.util.HashMap;
+import java.util.Map;
 class Solution {
+
+    // public int characterReplacement(String s, int k) {
+    //     int[] count = new int[26];
+    //     int maxFreq = 0, maxLen = 0, left = 0;
+
+    //     for (int right = 0; right < s.length(); right++) {
+    //         count[s.charAt(right) - 'A']++;
+    //         maxFreq = Math.max(maxFreq, count[s.charAt(right) - 'A']);
+
+    //         // window size - most frequent char > k → shrink
+    //         if ((right - left + 1) - maxFreq > k) {
+    //             count[s.charAt(left) - 'A']--;
+    //             left++;
+    //         }
+
+    //         maxLen = Math.max(maxLen, right - left + 1);
+    //     }
+
+    //     return maxLen;
+    // }
+
     public int characterReplacement(String s, int k) {
-        int[] count = new int[26];
-        int maxFreq = 0, maxLen = 0, left = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        int maxlen = 0, left = 0, maxFreq = 0;
 
-        for (int right = 0; right < s.length(); right++) {
-            count[s.charAt(right) - 'A']++;
-            maxFreq = Math.max(maxFreq, count[s.charAt(right) - 'A']);
+        for(int right = 0; right < s.length(); right++) {
+            char curr = s.charAt(right);
+            map.put(curr, map.getOrDefault(curr, 0) + 1);
 
-            // window size - most frequent char > k → shrink
-            if ((right - left + 1) - maxFreq > k) {
-                count[s.charAt(left) - 'A']--;
+            maxFreq = Math.max(maxFreq, map.get(curr));
+
+            if((right - left + 1) - maxFreq > k) {
+                char leftChar = s.charAt(left);
+                map.put(leftChar, map.get(leftChar) - 1);
                 left++;
             }
-
-            maxLen = Math.max(maxLen, right - left + 1);
+            maxlen = Math.max(maxlen, right - left + 1);
         }
-
-        return maxLen;
+        return maxlen;
     }
 }

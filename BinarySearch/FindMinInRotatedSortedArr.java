@@ -28,22 +28,20 @@ Explanation: The original array was [1,2,3,4,5] rotated 3 times.
 
 class Solution {
     public int findMin(int[] nums) {
-        int low = 0, high = nums.length - 1;
+        int lo = 0 , high = nums.length - 1;
 
-        while (low < high) {
-            int mid = low + (high - low) / 2;
+        while(lo < high) {
+            int mid = lo + (high - lo) / 2;
 
-            // if mid element is greater than the last element,
-            // then the minimum lies in the right half
-            if (nums[mid] > nums[high]) {
-                low = mid + 1;
-            } 
-            // otherwise, the minimum lies in the left half (including mid)
-            else {
+            if( nums[mid] <= nums[high]) { // ans is in the left side
                 high = mid;
+            } else {
+                lo = mid + 1;
             }
+        
         }
-        return nums[low];
+
+        return nums[lo];
     }
 }
 

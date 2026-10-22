@@ -4,7 +4,8 @@ Subscribe to TUF+
 
 Hints
 Company
-Given an array nums and an integer k. R﻿eturn true if there exist subsequences such that the sum of all elements in subsequences is equal to k else false.
+Given an array nums and an integer k. R﻿eturn true if there exist subsequences
+such that the sum of all elements in subsequences is equal to k else false.
 
 
 Example 1

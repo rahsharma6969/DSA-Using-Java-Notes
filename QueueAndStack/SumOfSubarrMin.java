@@ -23,13 +23,46 @@ Output: 444
   */
 
 
+import java.util.Stack;
+import java.util.*;
 class Solution {
+    
+    public void pse(int[] arr, int[] left) {
+        Stack<Integer> stack = new Stack<>();
+        int n = arr.length;
+        for(int i = 0; i < n; i++) {
+            while(!stack.isEmpty() && arr[stack.peek()] > arr[i]) {
+                stack.pop();
+            }
+            left[i] = stack.isEmpty() ? -1 : stack.peek();
+            stack.push(i);
+        }
+    }
+    public void nse(int[] arr, int[] left, int[] right) {
+        Stack<Integer> stack = new Stack<>();
+        int n = arr.length;
+        for(int i = 0; i < n; i++) {
+            while(!stack.isEmpty() && arr[stack.peek()] > arr[i]) {
+                stack.pop();
+            }
+            left[i] = stack.isEmpty() ? -1 : stack.peek();
+            stack.push(i);
+        }
+    }
     public int sumSubarrayMins(int[] arr) {
         int n = arr.length;
         Stack<Integer> stack = new Stack<>();
         int[] left = new int[n];
-        int[] right = new int[n];
+        int[] right = new int[n];   
         nse(arr, left, right);
+        long ans = 0;
+        for(int i = 0; i < n; i++) {
+            long l = left[i] == -1 ? i + 1 : i - left[i];
+            long r = right[i] == n ? n - i : right[i] - i;
+            ans += (l * r * arr[i]) % 1000000007;
+            ans %= 1000000007;
+        }
+        return (int)ans;
     }
 }
 public class SumOfSubarrMin {

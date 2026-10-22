@@ -21,7 +21,7 @@ Output: 2
 
 */
 
-import java.util.HashSet;
+
 
 class Solution {
     // Approach 1: Brute Force
@@ -45,20 +45,18 @@ class Solution {
     // time complexity: O(n)
     // space complexity: O(1)
     public int findMaxConsecutiveOnes2(int[] nums) {
-        int maxCount = 0;
-        int count = 0;
-        int left = 0;
+        int maxcount = 0;
+        int l = 0;
 
-        for(int right = 0 ; right < nums.length; right++) {
-            if(nums[right] == 1){
-                count++;
-            } else {
-                count =0;
-                left = right + 1;
+        for(int r = 0; r<nums.length; r++) {
+
+            while(nums[r] == 0 && l <= r) {
+                l = r + 1;
             }
-            maxCount = Math.max(maxCount, count);
-        }
-        return maxCount;
+
+        maxcount = Math.max(maxcount , r- l + 1);
+      }
+      return maxcount;
     }
 }
 // key difference between the two approaches is that the 

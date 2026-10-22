@@ -25,6 +25,7 @@ public class ReverseWordString {
    public static String reverseWords(String s) {
     String[] words = s.trim().split("\\s+");// remove leading and trailing spaces and split by one or more spaces
     StringBuilder sb = new StringBuilder();
+
     for (int i = words.length - 1; i >= 0; i--) { // since we have converted string to array of words we can easily
     //  reverse the order of words by traversing from end to start
         sb.append(words[i]);
@@ -58,6 +59,20 @@ public class ReverseWordString {
     public static String removeSpaces(String s) {
         return s.replace(" ", "");
     }
+
+   
+        //your code goes here
+       public String largestOddNumber(String s) {
+    for(int i = s.length() - 1; i >= 0; i--) {
+        char ch = s.charAt(i);
+        int digit = ch - '0';
+        if(digit % 2 != 0) {
+            return s.substring(0, i + 1);
+        }
+    }
+    return "";
+}
+       
 
     public static void main(String[] args) {
         String s = "  hello world  ";

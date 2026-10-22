@@ -6,12 +6,12 @@ public class Subsets {
     // time complexity: O(n * 2^n)
     // space complexity: O(n * 2^n)
 
-      static int  backtracking(int[] nums, int start, List<Integer> currentList, List<List<Integer>> resuList){
-        resultList.add(new ArrayList<>(currentList));
+      static int  backtracking(int[] nums, int start, List<Integer> currentList, List<List<Integer>> result){
+        result.add(new ArrayList<>(currentList));
 
         for (int i = start; i < nums.length; i++) {
             currentList.add(nums[i]);
-            backtracking(nums, i + 1, currentList, resuList);
+            backtracking(nums, i + 1, currentList, result);
             currentList.remove(currentList.size() - 1);
         }
         return 0;

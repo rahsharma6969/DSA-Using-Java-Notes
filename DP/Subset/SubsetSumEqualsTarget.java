@@ -16,29 +16,29 @@ Output: false
 Explanation: There is no subset with target sum 30.
 */
 import java.util.Arrays;
+
 class Solution {
-    // using recursion
-//     static boolean solve(int idx , int[] arr , int target){
-//         if(target == 0) return true;
-//         if(idx == 0) {
-//             if(arr[idx] != target) return false;
-//             else return true;
-//         }
-//         boolean nottaken = solve(idx-1, arr, target);
-//         boolean taken = false;
-//         if(arr[idx] <= target){
-//             taken = solve(idx-1, arr, target-arr[idx]);
-//         }
-//         if(taken) return true;
-//         else return nottaken;
+   // using recursion
+    static boolean solve(int idx , int[] arr , int target){
+        if(target == 0) return true;
+        if(idx == 0) {
+            if(arr[idx] != target) return false;
+            else return true;
+        }
 
-//     }
+        boolean nottaken = solve(idx-1, arr, target);
+        boolean taken = false;
+        if(arr[idx] <= target){
+            taken = solve(idx-1, arr, target - arr[idx]);
+        }
+        return taken || nottaken;
+    }
 
-//     static Boolean isSubsetSum(int arr[], int sum) {
-//        int n = arr.length;
-//        return solve(n-1, arr, sum); 
-//     }
-// }
+    static Boolean isSubsetSum(int arr[], int sum) {
+       int n = arr.length;
+       return solve(n-1, arr, sum); 
+    }
+}
 
     // using memoization
     // time complexity : O(N*sum) where N is the size of the array and sum is the target sum
@@ -59,7 +59,7 @@ class Solution {
 
     }
 
-    static Boolean isSubsetSum(int arr[], int sum) {
+    static Boolean isSubsetSum1(int arr[], int sum) {
        int n = arr.length;
        Boolean[][] dp = new Boolean[n][sum+1];
        for(Boolean[] row : dp){

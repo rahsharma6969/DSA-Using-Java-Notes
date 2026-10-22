@@ -35,49 +35,84 @@ import java.util.Arrays;
 
 
 class Solution {
+   
 
 
-    private int solve(int index, int[] nums, int start, int[] dp) {
 
-        if(index < start) {
-            return 0;
-        }
+    // Solves House Robber I for the range [start...end]
+    public int solver(int[] money, int idx, int start) {
 
-        if(dp[index] != -1) {
-            return dp[index];
-        }
+        // Base cases
+        if (idx < start) return 0;
+        if (idx == start) return money[start];
 
-        int pick = nums[index] + solve(index - 2, nums, start, dp);
-        int notPick = solve(index - 1, nums, start, dp);
-
-        return dp[index] = Math.max(pick, notPick);
+        // Pick or Not Pick
+        return Math.max(
+                money[idx] + solver(money, idx - 2, start),
+                solver(money, idx - 1, start)
+        );
     }
 
-    public int rob(int[] nums) {
+    public int houseRobber(int[] money) {
 
-        int n = nums.length;
+        int n = money.length;
 
-        if(n == 1) {
-            return nums[0];
-        }
+        // Edge case
+        if (n == 1) return money[0];
 
-        // Case 1: houses [0 ... n-2]
-        int[] dp1 = new int[n];
-        Arrays.fill(dp1, -1);
-        int case1 = solve(n - 2, nums, 0, dp1);
+        // Case 1: Exclude last house
+        int case1 = solver(money, n - 2, 0);
 
-        // Case 2: houses [1 ... n-1]
-        int[] dp2 = new int[n];
-        Arrays.fill(dp2, -1);
-        int case2 = solve(n - 1, nums, 1, dp2);
+        // Case 2: Exclude first house
+        int case2 = solver(money, n - 1, 1);
 
         return Math.max(case1, case2);
     }
-    // using memoization
+
+
+    // private int solve(int index, int[] nums, int start, int[] dp) {
+
+    //     if(index < start) {
+    //         return 0;
+    //     }
+
+    //     if(dp[index] != -1) {
+    //         return dp[index];
+    //     }
+
+    //     int pick = nums[index] + solve(index - 2, nums, start, dp);
+    //     int notPick = solve(index - 1, nums, start, dp);
+
+    //     return dp[index] = Math.max(pick, notPick);
+    // }
+
+    // public int rob(int[] nums) {
+
+    //     int n = nums.length;
+
+    //     if(n == 1) {
+    //         return nums[0];
+    //     }
+
+    //     // Case 1: houses [0 ... n-2]
+    //     int[] dp1 = new int[n];
+    //     Arrays.fill(dp1, -1);
+    //     int case1 = solve(n - 2, nums, 0, dp1);
+
+    //     // Case 2: houses [1 ... n-1]
+    //     int[] dp2 = new int[n];
+    //     Arrays.fill(dp2, -1);
+    //     int case2 = solve(n - 1, nums, 1, dp2);
+
+    //     return Math.max(case1, case2);
+    // }
+    // // using memoization
 
 }
 
 
 public class HouseRobber2 {
-    
+    public static void main(String[] args) {
+        Solution sol = 
+    }
 }

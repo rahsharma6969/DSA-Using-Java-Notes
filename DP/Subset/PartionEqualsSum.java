@@ -26,28 +26,33 @@ import java.util.Arrays;
 
 class Solution {
     // using recursion
-    // boolean solve(int idx, int[] nums, int target){
-    // if(target == 0) return true;
-    // if(idx == 0){
-    // if(nums[idx] != target) return false;
-    // else return true;
-    // }
-    // boolean nottaken = solve(idx-1, nums, target);
-    // boolean taken = false;
-    // if(nums[idx] <= target){
-    // taken = solve(idx-1, nums, target - nums[idx]);
-    // }
-    // return taken || nottaken;
-    // }
-    // public boolean canPartition(int[] nums) {
-    // int totalsum = 0;
-    // for(int num : nums){
-    // totalsum += num;
-    // }
-    // if(totalsum % 2 == 1) return false;
-    // int target = totalsum / 2;
-    // return solve(nums.length - 1, nums, target);
-    // }
+    boolean solve(int idx, int[] nums, int target){
+        if(idx == 0) {
+            return nums[idx] == target;
+        }
+
+        if(target == 0) return true;
+        if(target < 0) return false;
+
+        boolean nottaken = solve(idx-1, nums, target);
+        boolean taken = false;
+        if(nums[idx] <= target){
+            taken = solve(idx-1, nums, target - nums[idx]);
+        }
+        return taken || nottaken;
+    }
+    
+    
+    public boolean canPartition(int[] nums) {
+        int totalSum = 0;
+        for(int num : nums){
+            totalSum += num;
+        }
+
+        if(totalSum % 2 == 1) return false; // if sum is odd then partition cannot be done
+        int target = totalSum / 2;
+        return solve(nums.length - 1, nums, target);
+    }
     // using memoization
     Boolean[][] dp;
 
@@ -61,7 +66,7 @@ class Solution {
                 return true;
         }
         if (dp[idx][target] != null)
-            return dp[idx][target];
+            return dp[idx][target];  
         boolean nottaken = solveMemo(idx - 1, nums, target);
         boolean taken = false;
         if (nums[idx] <= target) {
@@ -70,7 +75,7 @@ class Solution {
         return dp[idx][target] = taken || nottaken;
     }
 
-    public boolean canPartition(int[] nums) {
+    public boolean canPartition1(int[] nums) {
         int totalsum = 0;
         for (int num : nums) {
             totalsum += num;
@@ -78,9 +83,9 @@ class Solution {
         if (totalsum % 2 == 1)
             return false;
         int target = totalsum / 2;
-        dp = new Boolean[nums.length][target + 1];
-        for (Boolean[] row : dp) {
-            Arrays.fill(row, null);
+        dp  = new int[nums.length][target + 1];
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
         }
         return solveMemo(nums.length - 1, nums, target);
     }

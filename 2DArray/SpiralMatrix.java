@@ -2,45 +2,53 @@ import java.util.*;
 
 public class SpiralMatrix {
     
-    static int [] spiral(int[][] mat){
-        int m = mat.length; // no of rows
-        int n  = mat[0].length; // no of columns
+    static int [] spiral(int[][] matrix){
+        List<Integer> ans = new ArrayList<>();
+        int r = matrix.length;
+        int c = matrix[0].length;
+
         int srow = 0;
         int scol = 0;
-        int erow = m-1;
-        int ecol = n-1;
-        int[] ans = new int[m*n];
-        int idx = 0;
-        while(srow < erow && scol < ecol){
 
+        int erow = matrix.length - 1;
+        int ecol = matrix[0].length - 1;
+
+        while(srow <= erow && scol <= ecol){
             // top
             for(int i = scol; i <= ecol; i++){
-                ans[idx++] = mat[srow][i];
+                ans.add(matrix[srow][i]);
             }
-            //right
-            for(int i = srow + 1; i <= erow; i++){
-                ans[idx++] = mat[i][ecol];
-            }
-
-
-            //bottom
-            for(int i=ecol - 1; i >= scol; i--){
-                ans[idx++] = mat[erow][i];
-            }
-
-
-            //left
-            for(int i= ecol - 1; i >= scol + 1; i--){
-                ans[idx++] = mat[i][scol];
-            }
-
             srow++;
-            scol++;
-            erow--;
-            ecol--;
-        }
-        return ans;
 
+            // right
+            for(int i = srow + 1; i <= erow; i++){
+                ans.add(matrix[i][ecol]);
+            }
+            ecol--;
+
+            // bottom
+            if(srow <= erow){
+                for(int i = ecol - 1; i >= scol; i--){
+                    ans.add(matrix[erow][i]);
+                }
+                erow--;
+            }
+
+            // left
+            if(scol <= ecol){
+                for(int i = erow; i >= srow + 1; i--){
+                    ans.add(matrix[i][scol]);
+                }
+                scol++;
+            }
+        }
+
+        // Convert the list to an array
+        int[] result = new int[ans.size()];
+        for (int i = 0; i < ans.size(); i++) {
+            result[i] = ans.get(i);
+        }
+        return result;
     }
 
     public static void main(String[] args) {
